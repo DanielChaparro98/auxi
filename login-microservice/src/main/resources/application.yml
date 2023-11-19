@@ -17,6 +17,9 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
 
+jwt:
+  secret: secret
+
 eureka:
   instance:
     hostname: localhost
