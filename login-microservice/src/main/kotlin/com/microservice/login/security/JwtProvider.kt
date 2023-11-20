@@ -4,7 +4,7 @@ import com.microservice.login.model.User
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import jakarta.annotation.PostConstruct
-import lombok.Value
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
 import org.springframework.validation.annotation.Validated
@@ -16,8 +16,8 @@ import java.util.Objects
 @Component
 class JwtProvider {
 
-    @org.springframework.beans.factory.annotation.Value("\${jwt.secret}")
-    var secret:String = "";
+    @Value("{jwt.secret}}")
+    var secret:String = "secret";
     val secretBytes = secret.toByteArray()
     @PostConstruct
     fun init(){
@@ -28,14 +28,14 @@ class JwtProvider {
         var claims:MutableMap<String,Any> = HashMap()
         claims = Jwts.claims().setSubject(authUser.email)
         claims["id"] = authUser.id
-        claims["role"] = authUser.role
+        claims["role"] = authUser.role.name
         val now: Date= Date()
         val exp:Date =Date(now.time + 36000000)
         return Jwts.builder()
             .setClaims(claims)
             .setIssuedAt(now)
             .setExpiration(exp)
-            .signWith(SignatureAlgorithm.ES256, secret)
+            .signWith(SignatureAlgorithm.HS512, secret)
             .compact()
     }
 

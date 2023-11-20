@@ -22,19 +22,17 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository
 
     override fun saveUser(user: UserDto): User {
         val userOptional: Optional<User> = userRepository.findByEmail(user.email)
-        if (!userOptional.isPresent){
-            throw Exception("Usuario no encontrado")
+        if (userOptional.isPresent){
+            throw Exception("Usuario ya existente")
         }
         val password:String = passwordEncoder.encode(user.password)
-        userOptional.get().email = user.email
-        userOptional.get().password = user.password
         val roleOptional:Optional<Role> = roleRepository.findByName(user.role)
-        userOptional.get().role = roleOptional.get()
-        return userRepository.save(userOptional.get());
+        val userDto = User( email = user.email, password = password, role = roleOptional.get());
+        return userRepository.save(userDto);
     }
 
     override fun login(user: UserDto): Token {
-        val userOptional: Optional<User> = userRepository.findByEmail(user.email)
+            val userOptional: Optional<User> = userRepository.findByEmail(user.email)
         if (!userOptional.isPresent){
             throw Exception("Usuario no encontrado")
         }
