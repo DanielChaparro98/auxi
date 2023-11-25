@@ -14,6 +14,7 @@ data class Profile(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
+        val number:String,
         val name: String,
         val phone: String,
         val studyType: String,
