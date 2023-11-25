@@ -7,11 +7,9 @@
 		<artifactId>microservice</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.microservice</groupId>
-	<artifactId>profile-microservice</artifactId>
+	<groupId>com.auxi</groupId>
+	<artifactId>microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>profile-microservice</name>
-	<description>Profile </description>
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>1.8.22</kotlin.version>

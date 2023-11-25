@@ -19,6 +19,7 @@
 		<module>eureka-microservice</module>
 		<module>config</module>
 		<module>login-microservice</module>
+		<module>profile-microservice</module>
 	</modules>
 	<description>Demo project for Spring Boot</description>
 	<properties>
