@@ -13,7 +13,7 @@ import java.util.Date
 data class Profile(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        val id: Long = 0,
         val number:String,
         val name: String,
         val phone: String,
