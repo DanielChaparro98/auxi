@@ -41,7 +41,7 @@ class JwtProvider {
 
     fun validate(token:String):Boolean{
         return try{
-            Jwts.parser().setSigningKey(secret).parseClaimsJwt(token);
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             true;
         }catch (e:Exception){
             false;
@@ -50,7 +50,7 @@ class JwtProvider {
 
     fun getEmailFromToken(token:String):String{
         try{
-            return Jwts.parser().setSigningKey(secret).parseClaimsJwt(token).body.subject
+            return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).body.subject
         }catch (e:Exception){
             return "bad token"
         }

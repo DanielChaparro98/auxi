@@ -16,11 +16,9 @@ spring:
           uri: http://localhost:8090
           predicates:
             - Path=/auth/**
-        - id: profile-service
+        - id: msvc-profile
           uri: http://localhost:9000
           predicates:
             - Path=/experience/**
-            - Path=/profile/**
-            - Path=/studies/**
           filters:
             - AuthFilter
