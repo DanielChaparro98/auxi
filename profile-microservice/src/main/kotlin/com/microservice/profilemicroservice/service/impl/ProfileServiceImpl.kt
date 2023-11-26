@@ -5,7 +5,9 @@ import com.microservice.profilemicroservice.entity.Profile
 import com.microservice.profilemicroservice.repository.ProfileReposotory
 import com.microservice.profilemicroservice.service.ProfileService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposotory): ProfileService {
     override fun saveProfile(profileDto: ProfileDto): Profile {
         val profileOptional = profileReposotory.findByNumber(profileDto.number)

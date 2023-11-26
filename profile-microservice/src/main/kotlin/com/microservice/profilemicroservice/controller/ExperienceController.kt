@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController
 class ExperienceController(@Autowired private val experienceService: ExperienceService) {
 
     @PostMapping("/save")
-    fun saveExperience (@RequestBody experienceDto: ExperienceDto):ResponseEntity<ExperienceDto>{
+    fun saveExperience (@RequestBody experienceDto: ExperienceDto):ResponseEntity<Experience>{
         val experience = experienceService.save(experienceDto);
-        return ResponseEntity.ok(experienceDto)
+        return ResponseEntity.ok(experience)
     }
 
     @GetMapping("/list")
