@@ -12,11 +12,11 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
-class AuthFilter(private val webClient: WebClient.Builder):AbstractGatewayFilterFactory<AuthFilter.config>() {
+class AuthFilter(private val webClient: WebClient.Builder):AbstractGatewayFilterFactory<AuthFilter.Config>(Config::class.java) {
 
     val webClientDos: WebClient.Builder = webClient
 
-    override fun apply(config: config?): GatewayFilter {
+    override fun apply(config: Config?): GatewayFilter {
         return GatewayFilter{exchange,chain->
             if(!exchange.request.headers.containsKey(HttpHeaders.AUTHORIZATION)){
                 return@GatewayFilter onError(exchange,HttpStatus.BAD_REQUEST)
@@ -46,5 +46,5 @@ class AuthFilter(private val webClient: WebClient.Builder):AbstractGatewayFilter
 
     }
 
-    class config{}
+    class Config{}
 }
