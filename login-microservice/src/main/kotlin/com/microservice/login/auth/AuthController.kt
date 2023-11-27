@@ -1,5 +1,6 @@
 package com.microservice.login.auth
 
+import com.microservice.login.dto.RequestDto
 import com.microservice.login.dto.UserDto
 import com.microservice.login.model.Token
 import com.microservice.login.model.User
@@ -26,8 +27,8 @@ class AuthController(@Autowired private val authService: UserService) {
     }
 
     @PostMapping("/validate")
-    fun validate(@RequestParam token:String):ResponseEntity<Token>{
-        val tokenDto:Token = authService.validate(token)
+    fun validate(@RequestParam token:String,@RequestBody requestDto: RequestDto):ResponseEntity<Token>{
+        val tokenDto:Token = authService.validate(token,requestDto)
         return ResponseEntity.ok(tokenDto);
     }
     @PostMapping("/register")

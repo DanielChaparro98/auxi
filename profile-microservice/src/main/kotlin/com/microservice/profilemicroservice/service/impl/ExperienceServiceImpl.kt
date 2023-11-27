@@ -6,6 +6,7 @@ import com.microservice.profilemicroservice.repository.ExperienceRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class ExperienceServiceImpl(@Autowired private val experienceRepository: ExperienceRepository):ExperienceService {
@@ -14,7 +15,7 @@ class ExperienceServiceImpl(@Autowired private val experienceRepository: Experie
         if(experienceOptional.isPresent){
             throw Exception("Experiencia ya existe")
         }
-        var experience = Experience(name = experienceDto.name, date = experienceDto.date, typeContract = experienceDto.typeContract)
+        var experience = Experience(name = experienceDto.name.lowercase(), date = experienceDto.date, typeContract = experienceDto.typeContract)
         return experienceRepository.save(experience)
     }
 

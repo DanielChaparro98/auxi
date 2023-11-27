@@ -1,5 +1,6 @@
 package com.microservice.login.service.impl
 
+import com.microservice.login.dto.RequestDto
 import com.microservice.login.dto.UserDto
 import com.microservice.login.model.Role
 import com.microservice.login.model.Token
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
-import javax.swing.text.html.Option
 
 @Service
 class UserServiceImpl(@Autowired private val userRepository: UserRepository
@@ -42,8 +42,8 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository
         throw Exception("Error en el Login")
     }
 
-    override fun validate(token: String): Token {
-        if(!jwtProvider.validate(token)){
+    override fun validate(token: String, requestDto: RequestDto): Token {
+        if(!jwtProvider.validate(token, requestDto)){
             throw Exception("Error con el token")
         }
         val email:String = jwtProvider.getEmailFromToken(token)

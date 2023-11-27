@@ -14,7 +14,7 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
         if(studyOptional.isPresent){
             throw Exception("Estudio ya existe")
         }
-        var studies = Studies(name = studiesDto.name , dateGraduation = studiesDto.dateGraduation)
+        var studies = Studies(name = studiesDto.name.lowercase() , dateGraduation = studiesDto.dateGraduation)
         return studiesRepository.save(studies)
     }
 

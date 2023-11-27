@@ -29,3 +29,16 @@ eureka:
   client:
     service-url:
       default-zone: http://localhost:8761/eureka
+
+
+professional-paths:
+  paths:
+    -
+      uri: "/profile/save"
+      method: "POST"
+    -
+      uri: "/studies/save"
+      method: "POST"
+    -
+      uri: "/experience/save"
+      method: "POST"
