@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -25,5 +26,11 @@ class ExperienceController(@Autowired private val experienceService: ExperienceS
     fun listExperience(): ResponseEntity<List<Experience>>{
         val listExperience:List<Experience> = experienceService.list();
         return ResponseEntity.ok(listExperience)
+    }
+
+    @GetMapping("/listFilter")
+    fun listExperienceFilter(@RequestParam email:String): ResponseEntity<List<Experience>>{
+        val listExperienceFilter: List<Experience> = experienceService.listByEmail(email)
+        return ResponseEntity.ok(listExperienceFilter)
     }
 }

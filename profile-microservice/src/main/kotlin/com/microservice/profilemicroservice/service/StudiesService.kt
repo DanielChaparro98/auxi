@@ -6,4 +6,5 @@ import com.microservice.profilemicroservice.entity.Studies
 interface StudiesService {
     fun saveStudy(studiesDto: StudiesDto):Studies
     fun listStudies():List<Studies>
+    fun listFilter(email:String):List<Studies>
 }

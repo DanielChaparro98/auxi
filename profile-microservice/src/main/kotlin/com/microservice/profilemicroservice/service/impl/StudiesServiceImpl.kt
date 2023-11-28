@@ -14,11 +14,22 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
         if(studyOptional.isPresent){
             throw Exception("Estudio ya existe")
         }
-        var studies = Studies(name = studiesDto.name.lowercase() , dateGraduation = studiesDto.dateGraduation)
+        var studies = Studies(name = studiesDto.name.lowercase() , dateGraduation = studiesDto.dateGraduation, email = studiesDto.email)
         return studiesRepository.save(studies)
     }
 
     override fun listStudies(): List<Studies> {
         return studiesRepository.findAll()
+    }
+
+    override fun listFilter(email: String): List<Studies> {
+        val studies:List<Studies> = studiesRepository.findAll();
+        val studiesFiler = mutableListOf<Studies>()
+        for(index in studies){
+            if(index.email == email){
+                studiesFiler.add(index)
+            }
+        }
+        return studiesFiler;
     }
 }

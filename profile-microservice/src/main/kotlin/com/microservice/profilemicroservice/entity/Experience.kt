@@ -12,5 +12,6 @@ data class Experience(
         val id:Long = 0,
         val name:String,
         val date : Date,
-        val typeContract: String
+        val typeContract: String,
+        val emailUser:String
 )

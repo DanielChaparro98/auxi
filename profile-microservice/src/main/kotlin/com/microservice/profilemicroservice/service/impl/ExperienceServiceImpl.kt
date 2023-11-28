@@ -15,11 +15,23 @@ class ExperienceServiceImpl(@Autowired private val experienceRepository: Experie
         if(experienceOptional.isPresent){
             throw Exception("Experiencia ya existe")
         }
-        var experience = Experience(name = experienceDto.name.lowercase(), date = experienceDto.date, typeContract = experienceDto.typeContract)
+        var experience = Experience(name = experienceDto.name.lowercase(), date = experienceDto.date, typeContract = experienceDto.typeContract, emailUser = experienceDto.email)
         return experienceRepository.save(experience)
     }
 
     override fun list(): List<Experience> {
         return experienceRepository.findAll()
+    }
+
+    override fun listByEmail(email:String): List<Experience> {
+        val experienceList = experienceRepository.findAll();
+        val experienceListFilter = mutableListOf<Experience>()
+        for (index in experienceList){
+
+            if(index.emailUser == email){
+                experienceListFilter.add(index)
+            }
+        }
+        return experienceListFilter;
     }
 }

@@ -5,5 +5,6 @@ import java.util.*
 data class ExperienceDto(
         val name:String,
         val date : Date,
-        val typeContract: String
+        val typeContract: String,
+        val email: String
 )

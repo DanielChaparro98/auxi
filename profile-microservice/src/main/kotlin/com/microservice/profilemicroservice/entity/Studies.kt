@@ -11,5 +11,6 @@ data class Studies(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id:Long = 0,
         val name:String,
-        val dateGraduation: Date
+        val dateGraduation: Date,
+        val email: String
 )
