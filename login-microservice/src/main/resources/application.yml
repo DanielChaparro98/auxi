@@ -6,9 +6,9 @@ spring:
     name: auth-service
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/users
-    username: admin
-    password: 1234
+    url: jdbc:mysql://viaduct.proxy.rlwy.net:58894/railway
+    username: root
+    password: bF1E3e3fH-2DADF366C626-fFEGbfeGb
   cloud:
     discovery:
       enabled: true

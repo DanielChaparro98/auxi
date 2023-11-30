@@ -4,8 +4,8 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - POSTGRES_USER=profile
-      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=gbRRwSWdsmo5JNhR
     ports:
       - '5432:5432'
     volumes:

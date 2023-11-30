@@ -6,9 +6,9 @@ spring:
     name: msvc-profile
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: profile
-    password: 1234
+    url: jdbc:postgresql://db.zvjhhksmluxartprywva.supabase.co:5432/postgres
+    username: postgres
+    password: gbRRwSWdsmo5JNhR
   jpa:
     hibernate:
       ddl-auto: create
