@@ -9,4 +9,5 @@ interface UserService {
     fun saveUser(user:UserDto):User
     fun login(user:UserDto):Token
     fun validate(token:String, requestDto: RequestDto):Token
+    fun updatePassword(email:String, password:String):User
 }

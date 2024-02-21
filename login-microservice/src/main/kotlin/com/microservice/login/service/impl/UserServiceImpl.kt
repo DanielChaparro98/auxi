@@ -53,6 +53,12 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository
         return Token(token)
     }
 
-
-
+    override fun updatePassword(email: String, password: String): User {
+        val findUser: Optional<User> =  userRepository.findByEmail(email)
+        if(findUser.isPresent){
+            findUser.get().password = password;
+            return findUser.get();
+        }
+        throw Exception("Email no encontrado")
+    }
 }
