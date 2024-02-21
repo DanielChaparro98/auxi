@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  application:
+    name: msvc-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: auth-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/auth/**
+        - id: msvc-profile
+          uri: http://localhost:9000
+          predicates:
+            - Path=/experience/** , /studies/** , /profile/**
+          filters:
+            - AuthFilter
