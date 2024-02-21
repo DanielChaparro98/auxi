@@ -34,3 +34,7 @@ spring:
             - Path=/experience/** , /studies/** , /profile/**
           filters:
             - AuthFilter
+        - id: msvc-offer
+          uri: http://localhost:9010
+          filters:
+            -AuthFilter
