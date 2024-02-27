@@ -21,6 +21,7 @@
 		<module>login-microservice</module>
 		<module>profile-microservice</module>
         <module>offer-microservice</module>
+		<module>support-microservice</module>
     </modules>
 	<description>Demo project for Spring Boot</description>
 	<properties>
