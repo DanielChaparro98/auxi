@@ -6,9 +6,9 @@ spring:
     name: msvc-offer
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db.zvjhhksmluxartprywva.supabase.co:5432/postgres
-    username: postgres
-    password: gbRRwSWdsmo5JNhR
+    url: jdbc:postgresql://localhost:5434/postgres
+    username: offer
+    password: 1234
   jpa:
     hibernate:
       ddl-auto: create
