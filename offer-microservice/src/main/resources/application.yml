@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: msvc-offer
+  config:
+    import: optional:configserver:http://localhost:8888
+    enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5434/postgres
@@ -14,8 +17,7 @@ spring:
       ddl-auto: create
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  config:
-    import: optional:configserver:http://localhost:8888
+
 
 eureka:
   instance:
