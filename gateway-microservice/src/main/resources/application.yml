@@ -36,5 +36,7 @@ spring:
             - AuthFilter
         - id: msvc-offer
           uri: http://localhost:9010
+          predicates:
+            - Path=/offers/**
           filters:
-            -AuthFilter
+            - AuthFilter
