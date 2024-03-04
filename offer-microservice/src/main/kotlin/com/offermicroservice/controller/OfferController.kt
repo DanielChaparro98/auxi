@@ -1,5 +1,6 @@
 package com.offermicroservice.controller
 
+import com.offermicroservice.dto.OfferDto
 import com.offermicroservice.entity.Offer
 import com.offermicroservice.service.OfferService
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,15 +19,15 @@ import org.springframework.web.bind.annotation.RestController
 class OfferController(@Autowired private val offerService: OfferService) {
 
     @PostMapping("/save")
-    fun saveOffer(@RequestBody offer: Offer):ResponseEntity<Offer>{
-        val offerSave = offerService.saveOffer(offer)
+    fun saveOffer(@RequestBody offerDto: OfferDto):ResponseEntity<Offer>{
+        val offerSave = offerService.saveOffer(offerDto)
         return ResponseEntity.ok().body(offerSave)
     }
 
     @PostMapping("/update")
     fun updateOffer(@RequestBody offer: Offer):ResponseEntity<Offer>{
         val offerUpdate = offerService.updateOffer(offer)
-        return ResponseEntity.ok().body(offer)
+        return ResponseEntity.ok().body(offerUpdate)
     }
 
     @PostMapping("/delete")

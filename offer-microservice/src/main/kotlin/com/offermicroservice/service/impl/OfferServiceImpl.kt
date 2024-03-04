@@ -1,19 +1,19 @@
 package com.offermicroservice.service.impl
 
+import com.offermicroservice.dto.OfferDto
 import com.offermicroservice.entity.Offer
 import com.offermicroservice.repository.OfferRepository
 import com.offermicroservice.service.OfferService
+import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository):OfferService {
+class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository, @Autowired private val modelMapper: ModelMapper):OfferService {
 
-    override fun saveOffer(offer: Offer): Offer {
-        if(findById(offer.id).isPresent){
-            throw Exception("La oferta ya existe")
-        }
+    override fun saveOffer(offerDto: OfferDto): Offer {
+        val offer:Offer = modelMapper.map(offerDto,Offer::class.java)
         return offerRepository.save(offer)
     }
 
@@ -53,10 +53,10 @@ class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository):
             optionalOffer.get().name = offer.name
             optionalOffer.get().state = offer.state
             optionalOffer.get().description = offer.description
-            optionalOffer.get().date = offer.date
-            optionalOffer.get().timeBegin = offer.timeBegin
-            optionalOffer.get().timeFinal = offer.timeFinal
-            return optionalOffer.get()
+            optionalOffer.get().startDate = offer.startDate
+            optionalOffer.get().finalDate = offer.finalDate
+            optionalOffer.get().email = offer.email
+            return offerRepository.save(optionalOffer.get())
         }
         throw Exception("Error al actualizar")
     }

@@ -7,7 +7,7 @@ import javax.swing.text.html.Option
 
 interface OfferService {
 
-    fun saveOffer(offer: Offer):Offer
+    fun saveOffer(offerDto: OfferDto):Offer
     fun listOffer(): List<Offer>
     fun deleteOffer(id: Long):String
     fun findById(id:Long): Optional<Offer>

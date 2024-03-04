@@ -1,6 +1,7 @@
 package com.offermicroservice.entity
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 import java.util.Date
 import java.util.TimeZone
 
@@ -13,7 +14,7 @@ data class Offer (
     var name:String,
     var description:String,
     var state: String,
-    var date: Date,
-    var timeBegin: TimeZone,
-    var timeFinal: TimeZone
+    var startDate: LocalDateTime,
+    var finalDate: LocalDateTime,
+    var email: String
 )
