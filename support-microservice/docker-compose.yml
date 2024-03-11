@@ -9,6 +9,6 @@ services:
       #- POSTGRES_USER=postgres
       #- POSTGRES_PASSWORD=gbRRwSWdsmo5JNhR
     ports:
-      - '5432:5436'
+      - '5436:5432'
     volumes:
       - ~/docker/postgres-data:/var/lib/postgres

@@ -2,10 +2,12 @@ package com.microservice.support
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 
+@EnableDiscoveryClient
 @SpringBootApplication
-class SupportApplication
+class SupportMicroserviceApplication
 
 fun main(args: Array<String>) {
-	runApplication<SupportApplication>(*args)
+	runApplication<SupportMicroserviceApplication>(*args)
 }

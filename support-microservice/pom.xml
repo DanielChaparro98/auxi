@@ -14,8 +14,8 @@
 	<description>Support Mircroservice</description>
 	<properties>
 		<java.version>17</java.version>
-		<kotlin.version>1.9.22</kotlin.version>
-		<spring-cloud.version>2023.0.0</spring-cloud.version>
+		<kotlin.version>1.8.22</kotlin.version>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,6 +64,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.1</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

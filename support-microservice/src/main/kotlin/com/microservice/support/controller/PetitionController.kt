@@ -1,5 +1,6 @@
 package com.microservice.support.controller
 
+import com.microservice.support.dto.PetitionDto
 import com.microservice.support.entity.Petition
 import com.microservice.support.service.PetitionService
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController
 class PetitionController(@Autowired private val petitionService: PetitionService) {
 
     @PostMapping("/save")
-    fun savePetition(@RequestBody petition: Petition): ResponseEntity<Petition>{
-        val petitionService = petitionService.savePetition(petition)
+    fun savePetition(@RequestBody petitionDto: PetitionDto): ResponseEntity<Petition>{
+        val petitionService = petitionService.savePetition(petitionDto)
         return ResponseEntity.ok().body(petitionService)
     }
 
@@ -30,7 +31,7 @@ class PetitionController(@Autowired private val petitionService: PetitionService
     }
 
     @PostMapping("/delete")
-    fun deletePetition(@RequestBody id: Long): ResponseEntity<String>{
+    fun deletePetition(@RequestParam id: Long): ResponseEntity<String>{
         val petitionService = petitionService.deletePetition(id)
         return ResponseEntity.ok().body(petitionService)
     }
@@ -41,7 +42,7 @@ class PetitionController(@Autowired private val petitionService: PetitionService
         return ResponseEntity.ok().body(petitions)
     }
 
-    @GetMapping("/find_by_id")
+    @GetMapping("/findById")
     fun findById(@RequestParam id:Long): ResponseEntity<Petition>{
         val optionalPetition = petitionService.findPetitionById(id).get()
         return ResponseEntity.ok().body(optionalPetition)

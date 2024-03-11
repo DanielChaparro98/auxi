@@ -1,19 +1,19 @@
 package com.microservice.support.service.impl
 
+import com.microservice.support.dto.PetitionDto
 import com.microservice.support.entity.Petition
 import com.microservice.support.repository.PetitionRepository
 import com.microservice.support.service.PetitionService
+import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class PetitionServiceImpl(@Autowired private val petitionRepository: PetitionRepository): PetitionService {
+class PetitionServiceImpl(@Autowired private val petitionRepository: PetitionRepository, @Autowired private val modelMapper: ModelMapper): PetitionService {
 
-    override fun savePetition(petition: Petition): Petition {
-        if(petitionRepository.findById(petition.id).isPresent){
-            throw Exception("La petición ya existe")
-        }
+    override fun savePetition(petitionDto: PetitionDto): Petition {
+        val petition:Petition = modelMapper.map(petitionDto, Petition::class.java)
         return petitionRepository.save(petition)
     }
 
@@ -23,7 +23,7 @@ class PetitionServiceImpl(@Autowired private val petitionRepository: PetitionRep
             optionalPetition.get().title = petition.title
             optionalPetition.get().description = petition.description
             optionalPetition.get().status = petition.status
-            return optionalPetition.get()
+            return petitionRepository.save(optionalPetition.get())
         }
         throw Exception("Error al actualizar petición")
     }

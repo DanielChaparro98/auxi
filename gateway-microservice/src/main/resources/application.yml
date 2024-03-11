@@ -40,3 +40,7 @@ spring:
             - Path=/offers/**
           filters:
             - AuthFilter
+        - id: msvc-support
+          uri: http://localhost:9020
+          predicates:
+            - Path=/petition/**
