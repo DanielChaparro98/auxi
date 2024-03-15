@@ -53,7 +53,9 @@ class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository, 
             optionalOffer.get().name = offer.name
             optionalOffer.get().state = offer.state
             optionalOffer.get().description = offer.description
-            optionalOffer.get().startDate = offer.startDate
+            optionalOffer.get().date = offer.date
+            optionalOffer.get().startTime = offer.startTime
+            optionalOffer.get().finalDate = offer.finalDate
             optionalOffer.get().finalDate = offer.finalDate
             optionalOffer.get().email = offer.email
             return offerRepository.save(optionalOffer.get())

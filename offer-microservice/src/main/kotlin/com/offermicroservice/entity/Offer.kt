@@ -1,9 +1,8 @@
 package com.offermicroservice.entity
 
 import jakarta.persistence.*
-import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.Date
-import java.util.TimeZone
 
 @Entity
 @Table(name="offers")
@@ -14,7 +13,8 @@ data class Offer (
     var name:String,
     var description:String,
     var state: String,
-    var startDate: LocalDateTime,
-    var finalDate: LocalDateTime,
+    var date: Date,
+    var startTime: LocalTime,
+    var finalDate: LocalTime,
     var email: String
 )

@@ -1,13 +1,12 @@
 package com.offermicroservice.dto
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import lombok.AllArgsConstructor
 import lombok.Builder
 import lombok.Data
 import lombok.NoArgsConstructor
-import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
 
 @NoArgsConstructor
@@ -18,11 +17,14 @@ data class OfferDto(
     val name:String,
     val description:String,
     val state:String,
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonProperty("start_date")
-    val startDate: LocalDateTime,
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonProperty("final_date")
-    val finalDate: LocalDateTime,
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    @JsonProperty("date")
+    val date: Date,
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
+    @JsonProperty("start_time")
+    val startDate: LocalTime,
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
+    @JsonProperty("final_time")
+    val finalDate: LocalTime,
     val email: String
 )
