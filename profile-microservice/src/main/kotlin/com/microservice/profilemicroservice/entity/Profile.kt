@@ -18,7 +18,7 @@ data class Profile(
         val name: String,
         val phone: String,
         val studyType: String,
-        val schedule: Date,
+        val schedule: String,
         val zone: String,
         @OneToMany
         val experiences: List<Experience>,

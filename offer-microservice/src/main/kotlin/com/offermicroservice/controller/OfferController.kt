@@ -3,6 +3,7 @@ package com.offermicroservice.controller
 import com.offermicroservice.dto.OfferDto
 import com.offermicroservice.entity.Offer
 import com.offermicroservice.service.OfferService
+import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@CrossOrigin("https://localhost:3000")
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/offers")
+@RequiredArgsConstructor
 class OfferController(@Autowired private val offerService: OfferService) {
 
     @PostMapping("/save")

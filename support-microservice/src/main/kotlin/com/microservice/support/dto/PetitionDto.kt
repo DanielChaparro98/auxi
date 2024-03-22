@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor
 import lombok.Builder
 import lombok.Data
 import lombok.NoArgsConstructor
+import java.util.Date
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor
 @Builder
 data class PetitionDto (
     val title: String,
+    val date: Date,
     val description: String,
     val status:String
 )

@@ -21,6 +21,7 @@ class PetitionServiceImpl(@Autowired private val petitionRepository: PetitionRep
         if(petitionRepository.findById(petition.id).isPresent){
             val optionalPetition = petitionRepository.findById(petition.id)
             optionalPetition.get().title = petition.title
+            optionalPetition.get().date = petition.date
             optionalPetition.get().description = petition.description
             optionalPetition.get().status = petition.status
             return petitionRepository.save(optionalPetition.get())

@@ -9,12 +9,13 @@ import com.microservice.profilemicroservice.repository.ProfileReposotory
 import com.microservice.profilemicroservice.repository.StudiesRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import com.microservice.profilemicroservice.service.ProfileService
+import com.microservice.profilemicroservice.service.StudiesService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposotory,
-@Autowired private val experienceRepository: ExperienceRepository, @Autowired private val studiesRepository: StudiesRepository): ProfileService {
+@Autowired private val experienceService: ExperienceService, @Autowired private val studiesService: StudiesService): ProfileService {
     override fun saveProfile(profileDto: ProfileDto): Profile {
         val profileOptional = profileReposotory.findByNumber(profileDto.number)
         if(profileOptional.isPresent){
@@ -22,19 +23,13 @@ class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposo
         }
         var experience = mutableListOf<Experience>();
         for (index in profileDto.experiences){
-            val experienceOptional = experienceRepository.findByName(index)
-            if(!experienceOptional.isPresent){
-                throw Exception("Experiencia no existe")
-            }
-            experience.addAll(listOf(experienceOptional.get()))
+            val experienceOptional = experienceService.findExperience(index)
+            experience.addAll(listOf(experienceOptional))
         }
         var studies = mutableListOf<Studies>()
         for(index in profileDto.studies){
-            val studiesOptional =  studiesRepository.findByName(index)
-            if(!studiesOptional.isPresent){
-                throw Exception("Experiencia no existe")
-            }
-            studies.addAll(listOf(studiesOptional.get()))
+            val studiesOptional =  studiesService.findByStudy(index)
+            studies.addAll(listOf(studiesOptional))
         }
         var profile = Profile(number = profileDto.number, name = profileDto.name, studyType = profileDto.studyType,
             zone = profileDto.zone, schedule = profileDto.schedule, phone = profileDto.phone, experiences = experience,

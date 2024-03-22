@@ -11,7 +11,9 @@ data class Experience(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id:Long = 0,
         val name:String,
-        val date : Date,
-        val typeContract: String,
-        val emailUser:String
+        val date: Date,
+        val type: String,
+        val email: String,
+        @Lob
+        val data:ByteArray
 )

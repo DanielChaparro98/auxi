@@ -6,7 +6,7 @@ spring:
     name: msvc-profile
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5434/postgres
     username: profile
     password: 1234
     #Producción

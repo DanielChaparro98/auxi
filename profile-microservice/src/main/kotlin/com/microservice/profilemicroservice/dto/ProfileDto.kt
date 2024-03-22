@@ -13,10 +13,10 @@ data class ProfileDto(
     val phone: String,
     @JsonProperty("study_type")
     val studyType: String,
-    val schedule: Date,
+    val schedule: String,
     val zone: String,
     //@JsonDeserialize(contentAs = Experience::class)
-    val experiences: List<String>,
+    val experiences: List<Long>,
     //@JsonDeserialize(contentAs = Studies::class)
-    val studies: List<String>
+    val studies: List<Long>
 )
