@@ -26,5 +26,6 @@ data class OfferDto(
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
     @JsonProperty("final_time")
     val finalDate: LocalTime,
-    val email: String
+    val email: String,
+    val price: String,
 )

@@ -15,5 +15,9 @@ data class Studies(
         val type: String,
         val email: String,
         @Lob
-        val data: ByteArray
+        val diploma: ByteArray,
+        @Lob
+        val rethus: ByteArray,
+        @Lob
+        val resolution: ByteArray
 )

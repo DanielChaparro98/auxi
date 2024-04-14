@@ -30,7 +30,7 @@ class AuthController(@Autowired private val authService: UserService) {
 
     @PostMapping("/validate")
     fun validate(@RequestParam token:String,@RequestBody requestDto: RequestDto):ResponseEntity<Token>{
-        val tokenDto:Token = authService.validate(token,requestDto)
+            val tokenDto:Token = authService.validate(token,requestDto)
         return ResponseEntity.ok(tokenDto);
     }
     @PostMapping("/register")

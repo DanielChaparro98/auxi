@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.net.URLDecoder
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -53,6 +54,13 @@ class OfferController(@Autowired private val offerService: OfferService) {
     @GetMapping("/list")
     fun listOffer():ResponseEntity<List<Offer>>{
         val offers = offerService.listOffer()
+        return ResponseEntity.ok().body(offers)
+    }
+
+    @GetMapping("/findByEmail")
+    fun findByEmail(@RequestParam email:String):ResponseEntity<List<Offer>>{
+        val emailDecode = URLDecoder.decode(email,"UTF-8")
+        val offers = offerService.findByEmail(emailDecode)
         return ResponseEntity.ok().body(offers)
     }
 }

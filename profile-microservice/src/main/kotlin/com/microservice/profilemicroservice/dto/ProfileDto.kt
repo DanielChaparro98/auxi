@@ -8,15 +8,12 @@ import jakarta.persistence.OneToMany
 import java.util.*
 
 data class ProfileDto(
-    val number: String,
     val name: String,
     val phone: String,
     @JsonProperty("study_type")
     val studyType: String,
-    val schedule: String,
+    val beginSchedule: String,
+    val endSchedule: String,
     val zone: String,
-    //@JsonDeserialize(contentAs = Experience::class)
-    val experiences: List<Long>,
-    //@JsonDeserialize(contentAs = Studies::class)
-    val studies: List<Long>
+    val email:String,
 )

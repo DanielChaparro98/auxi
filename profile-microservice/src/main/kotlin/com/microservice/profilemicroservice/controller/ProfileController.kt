@@ -25,4 +25,11 @@ class ProfileController(@Autowired private val profileService: ProfileService) {
         val listProfile = profileService.listProfile()
         return ResponseEntity.ok(listProfile)
     }
+
+    @GetMapping("/listEmail")
+    fun findByProfile(@RequestParam email:String):ResponseEntity<List<Profile>>{
+        val listProfileEmail = profileService.findByEmail(email)
+        return ResponseEntity.ok(listProfileEmail)
+    }
+
 }

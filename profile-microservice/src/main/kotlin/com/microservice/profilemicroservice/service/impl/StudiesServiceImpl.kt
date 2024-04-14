@@ -15,14 +15,25 @@ import java.util.*
 class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesRepository, @Autowired private val uploadFile:File):StudiesService {
 
     @Transactional
-    override fun saveStudy(studiesDto: StudiesDto, file: MultipartFile): Studies {
+    override fun saveStudy(studiesDto: StudiesDto, diploma: MultipartFile, rethus: MultipartFile, resolution: MultipartFile): Studies {
         val studyOptional =  studiesRepository.findByName(studiesDto.name)
-        val data = uploadFile.store(file)
-        if(studyOptional.isPresent){
-            throw Exception("Estudio ya existe")
+        val diplomaData = uploadFile.store(diploma)
+        val rethusData = uploadFile.store(rethus)
+        val resolutionData = uploadFile.store(resolution)
+        if(!studyOptional.isPresent){
+            var studies = Studies(
+                name = studiesDto.name.lowercase(),
+                date = studiesDto.date,
+                type = studiesDto.type,
+                email = studiesDto.email,
+                diploma = diplomaData,
+                rethus = rethusData,
+                resolution = resolutionData
+            )
+            return studiesRepository.save(studies)
+
         }
-        var studies = Studies(name = studiesDto.name.lowercase() ,date = studiesDto.date ,type = studiesDto.type,data = data, email = studiesDto.email)
-        return studiesRepository.save(studies)
+        throw Exception("Estudio ya existe")
     }
 
     override fun findByStudy(id: Long): Studies {
@@ -37,14 +48,13 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
         return studiesRepository.findAll()
     }
 
-    override fun listFilter(email: String): List<Studies> {
-        val studies:List<Studies> = studiesRepository.findAll();
-        val studiesFiler = mutableListOf<Studies>()
-        for(index in studies){
-            if(index.email == email){
-                studiesFiler.add(index)
-            }
+    @Transactional
+    override fun findByEmail(email: String): List<Long> {
+        val studiesList = studiesRepository.findByEmail(email)
+        val studiesFilterList = mutableListOf<Long>()
+        for (index in studiesList) {
+            studiesFilterList.add(index.id)
         }
-        return studiesFiler;
+        return studiesFilterList
     }
 }

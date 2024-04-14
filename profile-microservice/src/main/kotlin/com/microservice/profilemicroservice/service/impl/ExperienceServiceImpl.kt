@@ -5,6 +5,7 @@ import com.microservice.profilemicroservice.entity.Experience
 import com.microservice.profilemicroservice.repository.ExperienceRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import com.microservice.profilemicroservice.util.File
+import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -34,15 +35,17 @@ class ExperienceServiceImpl(@Autowired private val experienceRepository: Experie
         return experienceRepository.findAll()
     }
 
-    override fun listByEmail(email:String): List<Experience> {
-        val experienceList = experienceRepository.findAll();
-        val experienceListFilter = mutableListOf<Experience>()
-        for (index in experienceList){
-
-            if(index.email == email){
-                experienceListFilter.add(index)
+    @Transactional
+    override fun listByEmail(email:String): List<Long> {
+        val experienceList = experienceRepository.findByEmail(email)
+        val experienceListFilter = mutableListOf<Long>()
+        if(experienceList.isNotEmpty()) {
+            for (index in experienceList) {
+                experienceListFilter.add(index.id)
+                return experienceListFilter;
             }
         }
-        return experienceListFilter;
+        throw Exception("No existen experiencias")
+
     }
 }

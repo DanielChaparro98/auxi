@@ -3,6 +3,7 @@ package com.microservice.support.controller
 import com.microservice.support.dto.PetitionDto
 import com.microservice.support.entity.Petition
 import com.microservice.support.service.PetitionService
+import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@CrossOrigin("https://localhost:3000")
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/petition")
+@RequiredArgsConstructor
 class PetitionController(@Autowired private val petitionService: PetitionService) {
 
     @PostMapping("/save")

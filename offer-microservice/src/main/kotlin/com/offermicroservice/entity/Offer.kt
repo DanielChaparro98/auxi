@@ -16,5 +16,6 @@ data class Offer (
     var date: Date,
     var startTime: LocalTime,
     var finalDate: LocalTime,
-    var email: String
+    var email: String,
+    var price: String
 )

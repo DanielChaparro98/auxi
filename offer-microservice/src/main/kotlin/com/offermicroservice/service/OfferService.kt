@@ -14,4 +14,6 @@ interface OfferService {
     fun findByState(state:String):List<Offer>
     fun oneOffer(id:Long):Offer
     fun updateOffer(offer: Offer):Offer
+
+    fun findByEmail(email:String):List<Offer>
 }

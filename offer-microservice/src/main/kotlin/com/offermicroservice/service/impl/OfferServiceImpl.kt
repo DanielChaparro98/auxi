@@ -58,8 +58,13 @@ class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository, 
             optionalOffer.get().finalDate = offer.finalDate
             optionalOffer.get().finalDate = offer.finalDate
             optionalOffer.get().email = offer.email
+            optionalOffer.get().price = offer.price
             return offerRepository.save(optionalOffer.get())
         }
         throw Exception("Error al actualizar")
+    }
+
+    override fun findByEmail(email: String): List<Offer> {
+        return offerRepository.findByEmail(email)
     }
 }

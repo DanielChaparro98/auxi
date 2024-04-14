@@ -6,5 +6,6 @@ import java.util.*
 
 interface ProfileReposotory: JpaRepository<Profile,Long> {
 
-    fun findByNumber(number: String): Optional<Profile>
+    fun findByName(name: String): Optional<Profile>
+    fun findByEmail(email:String):List<Profile>
 }

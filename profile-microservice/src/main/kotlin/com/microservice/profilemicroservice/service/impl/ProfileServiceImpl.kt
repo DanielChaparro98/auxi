@@ -12,32 +12,48 @@ import com.microservice.profilemicroservice.service.ProfileService
 import com.microservice.profilemicroservice.service.StudiesService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import kotlin.math.exp
 
 @Service
 class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposotory,
 @Autowired private val experienceService: ExperienceService, @Autowired private val studiesService: StudiesService): ProfileService {
     override fun saveProfile(profileDto: ProfileDto): Profile {
-        val profileOptional = profileReposotory.findByNumber(profileDto.number)
+        val profileOptional = profileReposotory.findByName(profileDto.name)
         if(profileOptional.isPresent){
             throw Exception("Experiencia ya existe")
         }
+        val experienceEmail = experienceService.listByEmail(profileDto.email)
+        val studiesEmail = studiesService.findByEmail(profileDto.email)
         var experience = mutableListOf<Experience>();
-        for (index in profileDto.experiences){
+        for (index in experienceEmail){
             val experienceOptional = experienceService.findExperience(index)
             experience.addAll(listOf(experienceOptional))
         }
         var studies = mutableListOf<Studies>()
-        for(index in profileDto.studies){
+        for(index in studiesEmail){
             val studiesOptional =  studiesService.findByStudy(index)
             studies.addAll(listOf(studiesOptional))
         }
-        var profile = Profile(number = profileDto.number, name = profileDto.name, studyType = profileDto.studyType,
-            zone = profileDto.zone, schedule = profileDto.schedule, phone = profileDto.phone, experiences = experience,
-            studies = studies)
+        var profile = Profile(
+            name = profileDto.name,
+            studyType = profileDto.studyType,
+            zone = profileDto.zone,
+            beginSchedule = profileDto.beginSchedule,
+            endSchedule = profileDto.endSchedule,
+            phone = profileDto.phone,
+            email = profileDto.email,
+            experiences = experience,
+            studies = studies
+        )
         return profileReposotory.save(profile)
     }
 
     override fun listProfile(): List<Profile> {
         return profileReposotory.findAll()
+    }
+
+    override fun findByEmail(email: String): List<Profile> {
+        val profile = profileReposotory.findByEmail(email)
+        return profile
     }
 }

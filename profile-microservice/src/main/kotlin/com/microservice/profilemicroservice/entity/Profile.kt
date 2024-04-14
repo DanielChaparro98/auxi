@@ -14,12 +14,13 @@ data class Profile(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0,
-        val number:String,
         val name: String,
         val phone: String,
         val studyType: String,
-        val schedule: String,
+        val beginSchedule: String,
+        val endSchedule:String,
         val zone: String,
+        val email: String,
         @OneToMany
         val experiences: List<Experience>,
         @OneToMany

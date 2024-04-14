@@ -6,4 +6,5 @@ import java.util.*
 
 interface ExperienceRepository:JpaRepository<Experience,Long> {
     fun findByName(name:String): Optional<Experience>
+    fun findByEmail(email:String): List<Experience>
 }

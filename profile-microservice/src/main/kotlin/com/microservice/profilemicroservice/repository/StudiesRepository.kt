@@ -6,4 +6,5 @@ import java.util.*
 
 interface StudiesRepository:JpaRepository<Studies,Long> {
     fun findByName(name:String): Optional<Studies>
+    fun findByEmail(email:String): List<Studies>
 }
