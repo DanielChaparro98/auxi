@@ -1,11 +1,6 @@
 package com.microservice.profilemicroservice.entity
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.util.Date
 
 @Entity
@@ -21,8 +16,10 @@ data class Profile(
         val endSchedule:String,
         val zone: String,
         val email: String,
-        @OneToMany
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+        @JoinColumn(name = "id_profile", referencedColumnName = "id")
         val experiences: List<Experience>,
-        @OneToMany
+        @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
+        @JoinColumn(name = "id_profile", referencedColumnName = "id")
         val studies: List<Studies>
 )

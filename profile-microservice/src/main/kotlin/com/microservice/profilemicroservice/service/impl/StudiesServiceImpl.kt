@@ -28,7 +28,7 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
                 email = studiesDto.email,
                 diploma = diplomaData,
                 rethus = rethusData,
-                resolution = resolutionData
+                resolution = resolutionData,
             )
             return studiesRepository.save(studies)
 

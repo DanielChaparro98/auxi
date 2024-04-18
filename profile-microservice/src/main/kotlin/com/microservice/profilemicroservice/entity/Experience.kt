@@ -2,6 +2,7 @@ package com.microservice.profilemicroservice.entity
 
 import jakarta.persistence.*
 import lombok.Builder
+import lombok.ToString
 import java.util.Date
 
 @Entity
@@ -15,5 +16,5 @@ data class Experience(
         val type: String,
         val email: String,
         @Lob
-        val data:ByteArray
+        val data:ByteArray,
 )

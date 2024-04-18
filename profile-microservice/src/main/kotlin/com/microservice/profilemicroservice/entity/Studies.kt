@@ -2,6 +2,7 @@ package com.microservice.profilemicroservice.entity
 
 import jakarta.persistence.*
 import lombok.Builder
+import lombok.ToString
 import java.util.Date
 
 @Entity
@@ -19,5 +20,5 @@ data class Studies(
         @Lob
         val rethus: ByteArray,
         @Lob
-        val resolution: ByteArray
+        val resolution: ByteArray,
 )

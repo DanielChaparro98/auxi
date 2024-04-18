@@ -10,6 +10,7 @@ import com.microservice.profilemicroservice.repository.StudiesRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import com.microservice.profilemicroservice.service.ProfileService
 import com.microservice.profilemicroservice.service.StudiesService
+import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import kotlin.math.exp
@@ -20,7 +21,7 @@ class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposo
     override fun saveProfile(profileDto: ProfileDto): Profile {
         val profileOptional = profileReposotory.findByName(profileDto.name)
         if(profileOptional.isPresent){
-            throw Exception("Experiencia ya existe")
+            throw Exception("Perfil ya existe")
         }
         val experienceEmail = experienceService.listByEmail(profileDto.email)
         val studiesEmail = studiesService.findByEmail(profileDto.email)
@@ -52,6 +53,7 @@ class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposo
         return profileReposotory.findAll()
     }
 
+    @Transactional
     override fun findByEmail(email: String): List<Profile> {
         val profile = profileReposotory.findByEmail(email)
         return profile

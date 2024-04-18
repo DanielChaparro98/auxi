@@ -1,5 +1,6 @@
 package com.microservice.profilemicroservice.dto
 
+import com.microservice.profilemicroservice.entity.Profile
 import jakarta.persistence.Lob
 import java.util.Date
 

@@ -15,7 +15,7 @@ spring:
     #password: gbRRwSWdsmo5JNhR
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   config:
