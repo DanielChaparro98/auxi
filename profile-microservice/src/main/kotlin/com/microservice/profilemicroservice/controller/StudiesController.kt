@@ -44,4 +44,11 @@ class StudiesController(@Autowired private val studiesService: StudiesService) {
         val listStudies:List<Long> = studiesService.findByEmail(emailDecode)
         return ResponseEntity.ok(listStudies)
     }
+
+    @GetMapping("/findByEmail")
+    fun findByEmail(@RequestParam email: String): ResponseEntity<Studies>{
+        val emailDecode = URLDecoder.decode(email,"UTF-8")
+        val findByEmail = studiesService.listByEmailObject(emailDecode)
+        return ResponseEntity.ok(findByEmail)
+    }
 }

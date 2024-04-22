@@ -9,4 +9,5 @@ interface StudiesService {
     fun findByStudy(id: Long): Studies
     fun listStudies():List<Studies>
     fun findByEmail(email:String):List<Long>
+    fun listByEmailObject(email: String): Studies
 }

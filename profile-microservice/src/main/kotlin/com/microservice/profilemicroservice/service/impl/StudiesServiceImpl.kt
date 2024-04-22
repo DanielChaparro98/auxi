@@ -7,8 +7,11 @@ import com.microservice.profilemicroservice.service.StudiesService
 import com.microservice.profilemicroservice.util.File
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cglib.core.Local
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Service
@@ -56,5 +59,14 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
             studiesFilterList.add(index.id)
         }
         return studiesFilterList
+    }
+
+    @Transactional
+    override fun listByEmailObject(email: String): Studies {
+        val studiesListEmail =  studiesRepository.findByEmail(email)
+        for (index in studiesListEmail) {
+            return index
+        }
+        throw Exception("No existen estudios relacionados")
     }
 }

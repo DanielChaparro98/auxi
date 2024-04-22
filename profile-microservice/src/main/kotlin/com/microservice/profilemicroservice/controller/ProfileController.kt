@@ -27,7 +27,7 @@ class ProfileController(@Autowired private val profileService: ProfileService) {
     }
 
     @GetMapping("/listEmail")
-    fun findByProfile(@RequestParam email:String):ResponseEntity<List<Profile>>{
+    fun findByProfile(@RequestParam email:String):ResponseEntity<Profile>{
         val listProfileEmail = profileService.findByEmail(email)
         return ResponseEntity.ok(listProfileEmail)
     }

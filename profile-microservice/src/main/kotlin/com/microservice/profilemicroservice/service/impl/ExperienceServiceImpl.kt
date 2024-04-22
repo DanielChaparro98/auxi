@@ -56,4 +56,15 @@ class ExperienceServiceImpl(@Autowired private val experienceRepository: Experie
         throw Exception("No existen experiencias")
 
     }
+
+    @Transactional
+    override fun listByEmailObject(email: String): Experience {
+        val experienceEmail =  experienceRepository.findByEmail(email)
+        if(experienceEmail.isNotEmpty()){
+            for(index in experienceEmail){
+                return index
+            }
+        }
+        throw Exception("No existen experiencias asociadas")
+    }
 }

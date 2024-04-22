@@ -10,4 +10,5 @@ interface ExperienceService {
     fun findExperience(id: Long): Experience
     fun list(): List<Experience>
     fun listByEmail(email: String): List<Long>
+    fun listByEmailObject(email: String): Experience
 }

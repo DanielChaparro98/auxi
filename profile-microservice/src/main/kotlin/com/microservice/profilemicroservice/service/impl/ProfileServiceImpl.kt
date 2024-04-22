@@ -4,20 +4,17 @@ import com.microservice.profilemicroservice.dto.ProfileDto
 import com.microservice.profilemicroservice.entity.Experience
 import com.microservice.profilemicroservice.entity.Profile
 import com.microservice.profilemicroservice.entity.Studies
-import com.microservice.profilemicroservice.repository.ExperienceRepository
-import com.microservice.profilemicroservice.repository.ProfileReposotory
-import com.microservice.profilemicroservice.repository.StudiesRepository
+import com.microservice.profilemicroservice.repository.ProfileRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import com.microservice.profilemicroservice.service.ProfileService
 import com.microservice.profilemicroservice.service.StudiesService
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import kotlin.math.exp
 
 @Service
-class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposotory,
-@Autowired private val experienceService: ExperienceService, @Autowired private val studiesService: StudiesService): ProfileService {
+class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileRepository,
+                         @Autowired private val experienceService: ExperienceService, @Autowired private val studiesService: StudiesService): ProfileService {
     override fun saveProfile(profileDto: ProfileDto): Profile {
         val profileOptional = profileReposotory.findByName(profileDto.name)
         if(profileOptional.isPresent){
@@ -54,8 +51,12 @@ class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposo
     }
 
     @Transactional
-    override fun findByEmail(email: String): List<Profile> {
+    override fun findByEmail(email: String): Profile? {
         val profile = profileReposotory.findByEmail(email)
-        return profile
+        return if (profile.isPresent) {
+            profile.get()
+        } else {
+            null
+        }
     }
 }

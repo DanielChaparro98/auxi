@@ -6,5 +6,5 @@ import com.microservice.profilemicroservice.entity.Profile
 interface ProfileService {
     fun saveProfile(profileDto: ProfileDto):Profile
     fun listProfile():List<Profile>
-    fun findByEmail(email:String):List<Profile>
+    fun findByEmail(email:String):Profile?
 }

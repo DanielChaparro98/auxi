@@ -5,6 +5,7 @@ import com.microservice.profilemicroservice.dto.ExperienceDto
 import com.microservice.profilemicroservice.entity.Experience
 import com.microservice.profilemicroservice.service.ExperienceService
 import lombok.RequiredArgsConstructor
+import org.bouncycastle.oer.its.etsi102941.Url
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -42,5 +43,12 @@ class ExperienceController(@Autowired private val experienceService: ExperienceS
         val emailDecode = URLDecoder.decode(email,"UTF-8")
         val listExperienceFilter: List<Long> = experienceService.listByEmail(emailDecode)
         return ResponseEntity.ok(listExperienceFilter)
+    }
+
+    @GetMapping("/findByEmail")
+    fun findByEmail(@RequestParam email: String): ResponseEntity<Experience>{
+        val emailDecode = URLDecoder.decode(email,"UTF-8")
+        val findEmail = experienceService.listByEmailObject(emailDecode)
+        return ResponseEntity.ok(findEmail)
     }
 }
