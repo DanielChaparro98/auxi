@@ -8,14 +8,14 @@ import java.util.Date
 data class Profile(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = 0,
-        val name: String,
-        val phone: String,
-        val studyType: String,
-        val beginSchedule: String,
-        val endSchedule:String,
-        val zone: String,
-        val email: String,
+        var id: Long = 0,
+        var name: String? = null,
+        var phone: String? = null,
+        var studyType: String? = null,
+        var beginSchedule: String? = null,
+        var endSchedule:String? = null,
+        var zone: String? = null,
+        var email: String? = null,
         @OneToMany(cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
         @JoinColumn(name = "id_profile", referencedColumnName = "id")
         val experiences: List<Experience>,

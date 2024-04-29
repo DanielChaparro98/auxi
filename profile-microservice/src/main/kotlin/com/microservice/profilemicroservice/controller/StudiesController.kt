@@ -32,6 +32,20 @@ class StudiesController(@Autowired private val studiesService: StudiesService) {
         return ResponseEntity.ok(studies)
     }
 
+    @PostMapping("/update")
+    fun updateStudies(
+        @RequestParam id: Long,
+        @RequestParam studiesResponse: String,
+        @RequestParam diploma: MultipartFile,
+        @RequestParam rethus: MultipartFile,
+        @RequestParam resolution: MultipartFile
+    ): ResponseEntity<Studies> {
+        val gson = Gson()
+        val studiesDto: StudiesDto = gson.fromJson(studiesResponse, StudiesDto::class.java)
+        val studies = studiesService.updateStudy(id, studiesDto, diploma, rethus, resolution)
+        return ResponseEntity.ok(studies)
+    }
+
     @GetMapping("/list")
     fun listStudies():ResponseEntity<List<Studies>>{
         val listStudies = studiesService.listStudies()
@@ -47,7 +61,7 @@ class StudiesController(@Autowired private val studiesService: StudiesService) {
 
     @GetMapping("/findByEmail")
     fun findByEmail(@RequestParam email: String): ResponseEntity<Studies>{
-        val emailDecode = URLDecoder.decode(email,"UTF-8")
+            val emailDecode = URLDecoder.decode(email,"UTF-8")
         val findByEmail = studiesService.listByEmailObject(emailDecode)
         return ResponseEntity.ok(findByEmail)
     }

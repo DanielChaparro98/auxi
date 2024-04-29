@@ -8,15 +8,16 @@ import com.microservice.profilemicroservice.repository.ProfileRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import com.microservice.profilemicroservice.service.ProfileService
 import com.microservice.profilemicroservice.service.StudiesService
+import jakarta.persistence.EntityNotFoundException
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileRepository,
+class ProfileServiceImpl(@Autowired private val profileRepository: ProfileRepository,
                          @Autowired private val experienceService: ExperienceService, @Autowired private val studiesService: StudiesService): ProfileService {
     override fun saveProfile(profileDto: ProfileDto): Profile {
-        val profileOptional = profileReposotory.findByName(profileDto.name)
+        val profileOptional = profileRepository.findByName(profileDto.name)
         if(profileOptional.isPresent){
             throw Exception("Perfil ya existe")
         }
@@ -43,16 +44,31 @@ class ProfileServiceImpl(@Autowired private val profileReposotory: ProfileReposi
             experiences = experience,
             studies = studies
         )
-        return profileReposotory.save(profile)
+        return profileRepository.save(profile)
+    }
+
+    override fun updateProfile(id: Long, profileDto: ProfileDto): Profile {
+        val profile =
+            profileRepository.findById(id).orElseThrow { EntityNotFoundException("Experiencia no encontrada: $id") }
+
+        profileDto.name?.let { profile.name = it }
+        profileDto.phone?.let { profile.phone = it }
+        profileDto.studyType?.let { profile.studyType = it }
+        profileDto.beginSchedule?.let { profile.beginSchedule = it }
+        profileDto.endSchedule?.let { profile.endSchedule = it }
+        profileDto.zone?.let { profile.zone = it }
+        profileDto.email?.let { profile.email = it }
+
+        return profile
     }
 
     override fun listProfile(): List<Profile> {
-        return profileReposotory.findAll()
+        return profileRepository.findAll()
     }
 
     @Transactional
     override fun findByEmail(email: String): Profile? {
-        val profile = profileReposotory.findByEmail(email)
+        val profile = profileRepository.findByEmail(email)
         return if (profile.isPresent) {
             profile.get()
         } else {

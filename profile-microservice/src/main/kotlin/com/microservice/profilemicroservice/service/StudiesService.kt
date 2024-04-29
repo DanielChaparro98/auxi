@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile
 
 interface StudiesService {
     fun saveStudy(studiesDto: StudiesDto, diploma: MultipartFile, rethus: MultipartFile, resolution: MultipartFile):Studies
+    fun updateStudy(id: Long, studiesUpdate: StudiesDto, diploma: MultipartFile, rethus: MultipartFile, resolution: MultipartFile): Studies
     fun findByStudy(id: Long): Studies
     fun listStudies():List<Studies>
     fun findByEmail(email:String):List<Long>

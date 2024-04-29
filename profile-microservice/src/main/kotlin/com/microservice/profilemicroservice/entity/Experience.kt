@@ -10,11 +10,11 @@ import java.util.Date
 data class Experience(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id:Long = 0,
-        val name:String,
-        val date: Date,
-        val type: String,
-        val email: String,
+        var id:Long = 0,
+        var name:String? = null,
+        var date: Date? = null,
+        var type: String? = null,
+        var email: String? = null,
         @Lob
-        val data:ByteArray,
+        var data:ByteArray? = null,
 )

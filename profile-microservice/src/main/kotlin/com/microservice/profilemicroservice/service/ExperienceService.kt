@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile
 
 interface ExperienceService {
     fun save(experienceDto: ExperienceDto, file: MultipartFile): Experience
+    fun update(id: Long, experienceUpdate: ExperienceDto, file:MultipartFile): Experience
     fun findExperience(id: Long): Experience
     fun list(): List<Experience>
     fun listByEmail(email: String): List<Long>

@@ -1,5 +1,6 @@
 package com.microservice.profilemicroservice.controller
 
+import com.google.gson.Gson
 import com.microservice.profilemicroservice.dto.ProfileDto
 import com.microservice.profilemicroservice.entity.Profile
 import com.microservice.profilemicroservice.service.ProfileService
@@ -17,6 +18,14 @@ class ProfileController(@Autowired private val profileService: ProfileService) {
     @PostMapping("/save")
     fun saveProfile(@RequestBody profileDto: ProfileDto):ResponseEntity<Profile>{
         val profile = profileService.saveProfile(profileDto)
+        return ResponseEntity.ok(profile)
+    }
+
+    @PostMapping("/update")
+    fun updateProfile(@RequestParam id: Long, @RequestParam profileDto: String): ResponseEntity<Profile> {
+        val gson = Gson()
+        val profileParse: ProfileDto = gson.fromJson(profileDto, ProfileDto::class.java)
+        val profile = profileService.updateProfile(id, profileParse)
         return ResponseEntity.ok(profile)
     }
 

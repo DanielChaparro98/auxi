@@ -5,6 +5,7 @@ import com.microservice.profilemicroservice.entity.Experience
 import com.microservice.profilemicroservice.repository.ExperienceRepository
 import com.microservice.profilemicroservice.service.ExperienceService
 import com.microservice.profilemicroservice.util.File
+import jakarta.persistence.EntityNotFoundException
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -29,6 +30,22 @@ class ExperienceServiceImpl(@Autowired private val experienceRepository: Experie
             email = experienceDto.email,
         )
         return experienceRepository.save(experience)
+    }
+
+    @Transactional
+    override fun update(id: Long, experienceUpdate: ExperienceDto, file: MultipartFile): Experience {
+        val experience =
+            experienceRepository.findById(id).orElseThrow { EntityNotFoundException("Experiencia no encontrada: $id") }
+        val data: ByteArray?;
+        if (!file.isEmpty) {
+            data = uploapFile.store(file);
+            experience.data = data
+        }
+        experienceUpdate.name?.let { experience.name = it }
+        experienceUpdate.type?.let { experience.type = it }
+        experienceUpdate.email?.let { experience.email = it }
+
+        return experience
     }
 
     override fun findExperience(id: Long): Experience {

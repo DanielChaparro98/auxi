@@ -5,13 +5,11 @@ import com.microservice.profilemicroservice.entity.Studies
 import com.microservice.profilemicroservice.repository.StudiesRepository
 import com.microservice.profilemicroservice.service.StudiesService
 import com.microservice.profilemicroservice.util.File
+import jakarta.persistence.EntityNotFoundException
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cglib.core.Local
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Service
@@ -37,6 +35,44 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
 
         }
         throw Exception("Estudio ya existe")
+    }
+
+    @Transactional
+    override fun updateStudy(
+        id: Long,
+        studiesUpdate: StudiesDto,
+        diploma: MultipartFile,
+        rethus: MultipartFile,
+        resolution: MultipartFile
+    ): Studies {
+        val studies =
+            studiesRepository.findById(id).orElseThrow { EntityNotFoundException("Experiencia no encontrada: $id") }
+
+        val diplomaData: ByteArray?;
+        val rethusData: ByteArray?;
+        val resolutionData: ByteArray?;
+
+        if (!diploma.isEmpty) {
+            diplomaData = uploadFile.store(diploma)
+            studies.diploma = diplomaData
+        }
+
+        if (!rethus.isEmpty) {
+            rethusData = uploadFile.store(rethus)
+            studies.rethus = rethusData
+        }
+
+        if (!resolution.isEmpty) {
+            resolutionData = uploadFile.store(resolution)
+            studies.resolution = resolutionData
+        }
+
+        studiesUpdate.name?.let { studies.name = it }
+        studiesUpdate.date?.let { studies.date = it }
+        studiesUpdate.type?.let { studies.type = it }
+        studiesUpdate.email?.let { studies.email = it }
+
+        return studies
     }
 
     override fun findByStudy(id: Long): Studies {

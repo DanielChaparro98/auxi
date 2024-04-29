@@ -26,6 +26,14 @@ class ExperienceController(@Autowired private val experienceService: ExperienceS
         return ResponseEntity.ok(experience)
     }
 
+    @PostMapping("/update")
+    fun updateExperience(@RequestParam id: Long, @RequestParam experience: String, @RequestParam("certificate") certificate: MultipartFile): ResponseEntity<Experience>{
+        val gson = Gson()
+        val experienceDto: ExperienceDto = gson.fromJson(experience, ExperienceDto::class.java)
+        val updateExperience = experienceService.update(id, experienceDto, certificate)
+        return ResponseEntity.ok(updateExperience)
+    }
+
     @GetMapping("/findExperience")
     fun findExperience(@RequestParam id:Long):ResponseEntity<Experience>{
         val experience = experienceService.findExperience(id)
