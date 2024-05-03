@@ -6,9 +6,11 @@ import com.microservice.profilemicroservice.repository.ProfileUserRepository
 import com.microservice.profilemicroservice.service.ProfileUserService
 import com.microservice.profilemicroservice.util.File
 import jakarta.persistence.EntityNotFoundException
+import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.util.*
 
 @Service
 class ProfileUserServiceImpl(
@@ -16,6 +18,10 @@ class ProfileUserServiceImpl(
     @Autowired private val uploapFile: File
 ) : ProfileUserService {
     override fun save(profileUserDto: ProfileUserDto, file: MultipartFile): ProfileUser {
+        var optionalProfileUser: Optional<ProfileUser> = profileUserRepository.findByEmail(profileUserDto.email)
+        if(optionalProfileUser.isPresent){
+            throw Exception("Perfil ya existe")
+        }
         val data = uploapFile.store(file)
         val profileUser = ProfileUser(
             name = profileUserDto.name,
@@ -46,10 +52,12 @@ class ProfileUserServiceImpl(
         return profile
     }
 
+    @Transactional
     override fun listProfile(): List<ProfileUser> {
         return profileUserRepository.findAll();
     }
 
+    @Transactional
     override fun findByEmail(email: String): ProfileUser? {
        val profile = profileUserRepository.findByEmail(email);
        return if(profile.isPresent) {

@@ -25,6 +25,12 @@ class UserServiceImpl(@Autowired private val userRepository: UserRepository
         if (userOptional.isPresent){
             throw Exception("Usuario ya existente")
         }
+        if(user.email.isEmpty()){
+            throw Exception("El correo no debe ser vacio")
+        }else if(user.password.isEmpty()) {
+            throw  Exception("La contraseña no debe ser vacia")
+        }
+
         val password:String = passwordEncoder.encode(user.password)
         val roleOptional:Optional<Role> = roleRepository.findByName(user.role)
         val userDto = User( email = user.email, password = password, role = roleOptional.get());

@@ -27,5 +27,6 @@ data class OfferDto(
     @JsonProperty("final_time")
     val finalDate: LocalTime,
     val email: String,
+    val emailUser: String,
     val price: String,
 )

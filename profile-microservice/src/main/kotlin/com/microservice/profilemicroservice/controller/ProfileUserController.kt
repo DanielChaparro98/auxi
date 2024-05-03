@@ -25,7 +25,7 @@ class ProfileUserController(@Autowired private val profileUserService: ProfileUs
 
     @PostMapping("/save")
     fun saveProfileUser(
-        @RequestParam profileUserDto: String,
+        @RequestParam("profileUser") profileUserDto: String,
         @RequestParam("medicalHistory") medicalHistory: MultipartFile
     ): ResponseEntity<ProfileUser> {
         val gson = Gson()

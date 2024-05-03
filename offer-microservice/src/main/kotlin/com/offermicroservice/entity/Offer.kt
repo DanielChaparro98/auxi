@@ -10,12 +10,13 @@ data class Offer (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id:Long = 0,
-    var name:String,
-    var description:String,
-    var state: String,
-    var date: Date,
-    var startTime: LocalTime,
-    var finalDate: LocalTime,
-    var email: String,
-    var price: String
+    var name:String ? = null,
+    var description:String ? = null,
+    var state: String ? = null,
+    var date: Date ? = null,
+    var startTime: LocalTime ? = null,
+    var finalDate: LocalTime ? = null,
+    var email: String ? = null,
+    var emailUser: String ? = null,
+    var price: String ? = null
 )

@@ -67,4 +67,8 @@ class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository, 
     override fun findByEmail(email: String): List<Offer> {
         return offerRepository.findByEmail(email)
     }
+
+    override fun selectOffer(emailUser: String): Offer {
+        TODO("Not yet implemented")
+    }
 }
