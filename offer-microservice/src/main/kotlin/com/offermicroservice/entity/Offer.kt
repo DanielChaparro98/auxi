@@ -11,6 +11,7 @@ data class Offer (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id:Long = 0,
     var name:String ? = null,
+    var nameProfessional: String? = null,
     var description:String ? = null,
     var state: String ? = null,
     var date: Date ? = null,

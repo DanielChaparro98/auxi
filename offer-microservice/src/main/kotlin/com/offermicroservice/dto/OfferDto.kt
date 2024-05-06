@@ -15,8 +15,9 @@ import java.util.*
 @Builder
 data class OfferDto(
     val name:String,
+    val nameProfessional: String,
     val description:String,
-    val state:String,
+    var state:String,
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @JsonProperty("date")
     val date: Date,

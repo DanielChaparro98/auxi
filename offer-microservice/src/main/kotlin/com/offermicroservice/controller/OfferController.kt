@@ -63,4 +63,45 @@ class OfferController(@Autowired private val offerService: OfferService) {
         val offers = offerService.findByEmail(emailDecode)
         return ResponseEntity.ok().body(offers)
     }
+
+    @PostMapping("/selectOffer")
+    fun selectOffer(@RequestParam idOffer: Long, @RequestParam emailUser: String): ResponseEntity<Offer>{
+        val emailDecode = URLDecoder.decode(emailUser, "UTF-8")
+        val findByOffer = offerService.selectOffer(idOffer, emailDecode)
+        return ResponseEntity.ok().body(findByOffer)
+    }
+
+    @PostMapping("/findByEmailAndOffer")
+    fun filterEmailAndOffer(@RequestParam email: String, @RequestParam state: String): ResponseEntity<List<Offer>>{
+        val emailDecode =  URLDecoder.decode(email, "UTF-8")
+        val filter = offerService.findByEmailAndState(emailDecode,state)
+        return ResponseEntity.ok().body(filter)
+    }
+
+    @GetMapping("/findByEmailUser")
+    fun findEmailUser(@RequestParam emailUser: String): ResponseEntity<List<Offer>>{
+        val emailDecode =  URLDecoder.decode(emailUser, "UTF-8")
+        val filter =  offerService.findByEmailUser(emailDecode)
+        return ResponseEntity.ok().body(filter)
+    }
+
+    @PostMapping("/cancelOffer")
+    fun cancelOffer(@RequestParam id: Long, @RequestParam email: String): ResponseEntity<Offer>{
+        val emailDecode = URLDecoder.decode(email, "UTF-8")
+        val filter = offerService.cancelOffer(id,emailDecode)
+        return ResponseEntity.ok().body(filter)
+    }
+
+    @PostMapping("/successOffer")
+    fun successOffer(@RequestParam id: Long, @RequestParam email: String): ResponseEntity<Offer>{
+        val emailDecode = URLDecoder.decode(email, "UTF-8")
+        val filter = offerService.successOffer(id, emailDecode)
+        return ResponseEntity.ok().body(filter)
+    }
+
+    @GetMapping("/validateDate")
+    fun validateDate(@RequestParam id:Long):ResponseEntity<Boolean>{
+        var date =  offerService.validateDateOffer(id)
+        return ResponseEntity.ok().body(date)
+    }
 }

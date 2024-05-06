@@ -15,5 +15,10 @@ interface OfferService {
     fun oneOffer(id:Long):Offer
     fun updateOffer(offer: Offer):Offer
     fun findByEmail(email:String):List<Offer>
-    fun selectOffer(emailUser:String):Offer
+    fun selectOffer(idOffer: Long, emailUser: String): Offer
+    fun findByEmailAndState(email: String, state: String):List<Offer>
+    fun findByEmailUser(emailUser:String): List<Offer>;
+    fun cancelOffer(idOffer: Long, emailUser: String): Offer;
+    fun successOffer(idOffer: Long, emailUser: String): Offer;
+    fun validateDateOffer(id:Long): Boolean
 }

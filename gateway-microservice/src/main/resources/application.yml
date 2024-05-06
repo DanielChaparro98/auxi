@@ -38,8 +38,8 @@ spring:
           uri: http://localhost:9010
           predicates:
             - Path=/offers/**
-          filters:
-            - AuthFilter
+#          filters:
+#            - AuthFilter
         - id: msvc-support
           uri: http://localhost:9020
           predicates:
