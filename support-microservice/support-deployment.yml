@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: support-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: support-microservice
+  template:
+    metadata:
+      labels:
+        app: support-microservice
+    spec:
+      containers:
+        - name: support-microservice
+          image: danielchaparro/support-microservice
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9020
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: support-microservice
+spec:
+  selector:
+    app: support-microservice
+  ports:
+    - protocol: TCP
+      port: 9020
+      targetPort: 9020

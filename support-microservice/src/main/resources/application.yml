@@ -5,15 +5,20 @@ spring:
   application:
     name: msvc-support
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5436/postgres
-    username: support
-    password: 1234
+    #driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://localhost:5436/postgres
+    #username: support
+    #password: 1234
+    #Producción
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://srv1455.hstgr.io:3306/u854419727_support
+    username: u854419727_auxi_support
+    password: 8Qi1bSH!
   jpa:
     hibernate:
       ddl-auto: create
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
   config:
     import: optional:configserver:http://localhost:8888
 

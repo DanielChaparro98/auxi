@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: offer-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: offer-microservice
+  template:
+    metadata:
+      labels:
+        app: offer-microservice
+    spec:
+      containers:
+        - name: offer-microservice-container
+          image: danielchaparro/offer-microservice
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9010
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: offer-microservice-svc
+spec:
+  selector:
+    app: offer-microservice
+  ports:
+    - protocol: TCP
+      port: 9010
+      targetPort: 9010

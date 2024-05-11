@@ -5,14 +5,15 @@ spring:
   application:
     name: msvc-profile
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5434/postgres
-    username: profile
-    password: 1234
+    #driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://localhost:5434/postgres
+    #username: profile
+    #password: 1234
     #Producción
-    #url: jdbc:postgresql://db.zvjhhksmluxartprywva.supabase.co:5432/postgres
-    #username: postgres
-    #password: gbRRwSWdsmo5JNhR
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
+    username:  postgres.kcnfbxnaantqzbvvukkw
+    password: 8V8RUZu5DY3kNyHr
   jpa:
     hibernate:
       ddl-auto: create-drop

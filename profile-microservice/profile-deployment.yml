@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile-microservice
+  template:
+    metadata:
+      labels:
+        app: profile-microservice
+    spec:
+      containers:
+        - name: profile-microservice
+          image: danielchaparro/profile-microservice
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile-microservice
+spec:
+  selector:
+    app: profile-microservice
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
