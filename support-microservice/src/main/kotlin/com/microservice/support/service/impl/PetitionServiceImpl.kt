@@ -4,6 +4,7 @@ import com.microservice.support.dto.PetitionDto
 import com.microservice.support.entity.Petition
 import com.microservice.support.repository.PetitionRepository
 import com.microservice.support.service.PetitionService
+import jakarta.persistence.EntityNotFoundException
 import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,15 +19,27 @@ class PetitionServiceImpl(@Autowired private val petitionRepository: PetitionRep
     }
 
     override fun updatePetition(petition: Petition): Petition {
-        if(petitionRepository.findById(petition.id).isPresent){
-            val optionalPetition = petitionRepository.findById(petition.id)
-            optionalPetition.get().title = petition.title
-            optionalPetition.get().date = petition.date
-            optionalPetition.get().description = petition.description
-            optionalPetition.get().status = petition.status
-            return petitionRepository.save(optionalPetition.get())
+        val petitionId = petitionRepository.findById(petition.id)
+            .orElseThrow { EntityNotFoundException("Petición no encontrada: $petition.id") }
+
+        petition.title?.let {
+            if (it.isNotEmpty()) {
+                petitionId.title
+            }
         }
-        throw Exception("Error al actualizar petición")
+        petition.date?.let { petitionId.date = it }
+        petition.description?.let {
+            if (it.isNotEmpty()) {
+                petitionId.description = it
+            }
+        }
+        petition.status?.let {
+            if (it.isNotEmpty()) {
+                petitionId.status = it
+            }
+        }
+        return petitionRepository.save(petitionId)
+
     }
 
     override fun deletePetition(id: Long): String{

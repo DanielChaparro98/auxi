@@ -57,20 +57,39 @@ class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository, 
     }
 
     override fun updateOffer(offer: Offer): Offer {
-        if(findById(offer.id).isPresent){
-            val optionalOffer = offerRepository.findById(offer.id);
-            optionalOffer.get().name = offer.name
-            optionalOffer.get().state = offer.state
-            optionalOffer.get().description = offer.description
-            optionalOffer.get().date = offer.date
-            optionalOffer.get().startTime = offer.startTime
-            optionalOffer.get().finalDate = offer.finalDate
-            optionalOffer.get().finalDate = offer.finalDate
-            optionalOffer.get().email = offer.email
-            optionalOffer.get().price = offer.price
-            return offerRepository.save(optionalOffer.get())
+        val offerId = offerRepository.findById(offer.id)
+            .orElseThrow { EntityNotFoundException("Oferta no encontrada: $offer.id") }
+
+        offer.name?.let {
+            if (it.isNotEmpty()) {
+                offerId.name = it
+            }
         }
-        throw Exception("Error al actualizar")
+        offer.state?.let {
+            if (it.isNotEmpty()) {
+                offerId.state = it
+            }
+        }
+        offer.description?.let {
+            if (it.isNotEmpty()) {
+                offerId.description = it
+            }
+        }
+        offer.date?.let { offerId.date = it }
+        offer.startTime?.let { offerId.startTime = it }
+        offer.finalDate?.let { offerId.finalDate = it }
+        offer.email?.let {
+            if (it.isNotEmpty()) {
+                offerId.email = it
+            }
+        }
+        offer.price?.let {
+            if (it.isNotEmpty()) {
+                offerId.price = it
+            }
+        }
+
+        return offerRepository.save(offerId)
     }
 
     override fun findByEmail(email: String): List<Offer> {
