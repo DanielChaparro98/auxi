@@ -5,15 +5,15 @@ spring:
   application:
     name: msvc-profile
   datasource:
-    #driver-class-name: org.postgresql.Driver
-    #url: jdbc:postgresql://localhost:5434/postgres
-    #username: profile
-    #password: 1234
-    #Producción
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
-    username:  postgres.kcnfbxnaantqzbvvukkw
-    password: 8V8RUZu5DY3kNyHr
+    url: jdbc:postgresql://localhost:5434/postgres
+    username: profile
+    password: 1234
+    #Producción
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
+#    username:  postgres.kcnfbxnaantqzbvvukkw
+#    password: 8V8RUZu5DY3kNyHr
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -24,7 +24,12 @@ spring:
 
 eureka:
   instance:
+    preferIpAddress: true
+    #hostname: eureka-microservice-0
     hostname: localhost
   client:
-    service-url:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      #defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
       defaultZone: http://localhost:8761/eureka

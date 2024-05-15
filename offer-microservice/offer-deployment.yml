@@ -13,7 +13,7 @@ spec:
         app: offer-microservice
     spec:
       containers:
-        - name: offer-microservice-container
+        - name: offer-microservice
           image: danielchaparro/offer-microservice
           imagePullPolicy: Always
           ports:

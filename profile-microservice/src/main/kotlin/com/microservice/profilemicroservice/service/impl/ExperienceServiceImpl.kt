@@ -41,11 +41,23 @@ class ExperienceServiceImpl(@Autowired private val experienceRepository: Experie
             data = uploapFile.store(file);
             experience.data = data
         }
-        experienceUpdate.name?.let { experience.name = it }
-        experienceUpdate.type?.let { experience.type = it }
-        experienceUpdate.email?.let { experience.email = it }
+        experienceUpdate.name?.let {
+            if (it.isNotEmpty()) {
+                experience.name = it
+            }
+        }
+        experienceUpdate.type?.let {
+            if (it.isNotEmpty()) {
+                experience.type = it
+            }
+        }
+        experienceUpdate.email?.let {
+            if (it.isNotEmpty()) {
+                experience.email = it
+            }
+        }
 
-        return experience
+        return experienceRepository.save(experience)
     }
 
     override fun findExperience(id: Long): Experience {

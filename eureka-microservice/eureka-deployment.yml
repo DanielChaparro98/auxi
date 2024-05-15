@@ -1,16 +1,42 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: eureka-microservice
+  name: eureka-config-map
+data:
+  eureka_service_address: http://eureka-0.eureka:8761/eureka
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka
+  labels:
+    app: eureka
 spec:
+  clusterIP: None
+  ports:
+    - port: 8761
+      name: eureka
+  selector:
+    app: eureka
+
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eureka
+spec:
+  serviceName: "eureka"
   replicas: 1
   selector:
     matchLabels:
-      app: eureka-microservice
+      app: eureka
   template:
     metadata:
       labels:
-        app: eureka-microservice
+        app: eureka
     spec:
       containers:
         - name: eureka-microservice
@@ -18,15 +44,23 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8761
+          env:
+            - name: EUREKA_SERVER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-config-map
+                  key: eureka_service_address
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: eureka-microservice-svc
+  labels:
+    app: eureka
 spec:
   selector:
-    app: eureka-microservice
+    app: eureka
+  type: NodePort
   ports:
-    - protocol: TCP
-      port: 8761
+    - port: 80
       targetPort: 8761

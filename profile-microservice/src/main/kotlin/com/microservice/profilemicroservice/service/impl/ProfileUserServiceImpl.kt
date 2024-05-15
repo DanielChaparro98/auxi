@@ -43,13 +43,33 @@ class ProfileUserServiceImpl(
             profile.medicalHistory = data
         }
 
-        profileUserDto.name?.let { profile.name = it }
-        profileUserDto.phone?.let { profile.phone = it }
-        profileUserDto.address?.let { profile.address = it }
-        profileUserDto.RH?.let { profile.RH = it }
-        profileUserDto.email?.let { profile.email = it }
+        profileUserDto.name?.let {
+            if (it.isNotEmpty()) {
+                profile.name = it
+            }
+        }
+        profileUserDto.phone?.let {
+            if (it.isNotEmpty()) {
+                profile.phone = it
+            }
+        }
+        profileUserDto.address?.let {
+            if (it.isNotEmpty()) {
+                profile.address = it
+            }
+        }
+        profileUserDto.RH?.let {
+            if (it.isNotEmpty()) {
+                profile.RH = it
+            }
+        }
+        profileUserDto.email?.let {
+            if (it.isNotEmpty()) {
+                profile.email = it
+            }
+        }
 
-        return profile
+        return profileUserRepository.save(profile)
     }
 
     @Transactional

@@ -4,12 +4,14 @@ server:
 eureka:
   instance:
     preferIpAddress: true
-    hostname: eureka-0
+    #hostname: eureka-microservice-0
+    hostname: localhost
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+      #defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+      defaultZone: http://localhost:8761/eureka
 
 spring:
   config:
@@ -39,18 +41,18 @@ spring:
           predicates:
             - Path=/auth/**
         - id: msvc-profile
-          uri: http://localhost:9000
+          uri: lb://MSVC-PROFILE
           predicates:
             - Path=/experience/** , /studies/** , /profile/**
 #          filters:
 #            - AuthFilter
         - id: msvc-offer
-          uri: http://localhost:9010
+          uri: lb://MSVC-OFFER
           predicates:
             - Path=/offers/**
 #          filters:
 #            - AuthFilter
         - id: msvc-support
-          uri: http://localhost:9020
+          uri: lb://MSVC-SUPPORT
           predicates:
             - Path=/petition/**

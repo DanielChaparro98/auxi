@@ -67,12 +67,24 @@ class StudiesServiceImpl(@Autowired private val studiesRepository: StudiesReposi
             studies.resolution = resolutionData
         }
 
-        studiesUpdate.name?.let { studies.name = it }
+        studiesUpdate.name?.let {
+            if (it.isNotEmpty()) {
+                studies.name = it
+            }
+        }
         studiesUpdate.date?.let { studies.date = it }
-        studiesUpdate.type?.let { studies.type = it }
-        studiesUpdate.email?.let { studies.email = it }
+        studiesUpdate.type?.let {
+            if (it.isNotEmpty()) {
+                studies.type = it
+            }
+        }
+        studiesUpdate.email?.let {
+            if (it.isNotEmpty()) {
+                studies.email = it
+            }
+        }
 
-        return studies
+        return studiesRepository.save(studies)
     }
 
     override fun findByStudy(id: Long): Studies {

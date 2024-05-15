@@ -13,6 +13,11 @@ spring:
     #url: jdbc:mysql://viaduct.proxy.rlwy.net:58894/railway
     #username: root
     #password: bF1E3e3fH-2DADF366C626-fFEGbfeGb
+    #Producción
+    #driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://srv1455.hstgr.io:3306/u854419727_users
+    #username: u854419727_auxi
+    #password: kNujb*]q7~
   cloud:
     discovery:
       enabled: true
@@ -29,10 +34,15 @@ jwt:
 
 eureka:
   instance:
+    preferIpAddress: true
+    #hostname: eureka-microservice-0
     hostname: localhost
   client:
-    service-url:
-      default-zone: http://localhost:8761/eureka
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      #defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+      defaultZone: http://localhost:8761/eureka
 
 
 professional-paths:

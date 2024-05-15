@@ -51,15 +51,43 @@ class ProfileServiceImpl(@Autowired private val profileRepository: ProfileReposi
         val profile =
             profileRepository.findById(id).orElseThrow { EntityNotFoundException("Experiencia no encontrada: $id") }
 
-        profileDto.name?.let { profile.name = it }
-        profileDto.phone?.let { profile.phone = it }
-        profileDto.studyType?.let { profile.studyType = it }
-        profileDto.beginSchedule?.let { profile.beginSchedule = it }
-        profileDto.endSchedule?.let { profile.endSchedule = it }
-        profileDto.zone?.let { profile.zone = it }
-        profileDto.email?.let { profile.email = it }
+        profileDto.name?.let {
+            if (it.isNotEmpty()) {
+                profile.name = it
+            }
+        }
+        profileDto.phone?.let {
+            if (it.isNotEmpty()) {
+                profile.phone = it
+            }
+        }
+        profileDto.studyType?.let {
+            if (it.isNotEmpty()) {
+                profile.studyType = it
+            }
+        }
+        profileDto.beginSchedule?.let {
+            if (it.isNotEmpty()) {
+                profile.beginSchedule = it
+            }
+        }
+        profileDto.endSchedule?.let {
+            if (it.isNotEmpty()) {
+                profile.endSchedule = it
+            }
+        }
+        profileDto.zone?.let {
+            if (it.isNotEmpty()) {
+                profile.zone = it
+            }
+        }
+        profileDto.email?.let {
+            if (it.isNotEmpty()) {
+                profile.email = it
+            }
+        }
 
-        return profile
+        return profileRepository.save(profile)
     }
 
     override fun listProfile(): List<Profile> {
