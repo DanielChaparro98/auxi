@@ -98,6 +98,11 @@ class ProfileServiceImpl(@Autowired private val profileRepository: ProfileReposi
     override fun findByEmail(email: String): Profile? {
         val profile = profileRepository.findByEmail(email)
         return if (profile.isPresent) {
+            if(profile.get().studyType.equals("AUX")){
+                profile.get().studyType = "Auxiliar de Enfermería"
+            }else if (profile.get().studyType.equals("ENF")){
+                profile.get().studyType = "Enfermería"
+            }
             profile.get()
         } else {
             null

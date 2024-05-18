@@ -14,5 +14,6 @@ data class PetitionDto (
     val title: String,
     val date: Date,
     val description: String,
-    val status:String
+    val status:String,
+    val email: String
 )

@@ -12,5 +12,6 @@ data class Petition(
     var title:String,
     var date: Date,
     var description:String,
-    var status:String
+    var status:String,
+    var email: String
 )

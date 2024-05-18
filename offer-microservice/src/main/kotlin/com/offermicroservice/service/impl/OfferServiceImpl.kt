@@ -114,9 +114,7 @@ class OfferServiceImpl(@Autowired private val offerRepository: OfferRepository, 
 
     override fun findByEmailUser(emailUser: String): List<Offer> {
         val filter =  offerRepository.findByEmailUser(emailUser)
-        if(filter.isEmpty()){
-            throw Exception("Email no existe")
-        }
+        //if(filter.isEmpty()){ throw Exception("Email no existe") }
         return filter
     }
 

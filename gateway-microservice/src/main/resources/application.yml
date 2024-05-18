@@ -55,4 +55,4 @@ spring:
         - id: msvc-support
           uri: lb://MSVC-SUPPORT
           predicates:
-            - Path=/petition/**
+            - Path=/petition/**, /petition-home/**
