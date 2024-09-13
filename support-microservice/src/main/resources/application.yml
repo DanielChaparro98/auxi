@@ -11,8 +11,8 @@ spring:
     #password: 1234
     #Producción
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://srv1455.hstgr.io:3306/u854419727_support
-    username: u854419727_auxi_support
+    url: jdbc:mysql://srv1623.hstgr.io:3306/u638268351_support
+    username: u638268351_auxi_support
     password: 8Qi1bSH!
   jpa:
     hibernate:
@@ -25,11 +25,11 @@ spring:
 eureka:
   instance:
     preferIpAddress: true
-    hostname: eureka-microservice-0
-    #hostname: localhost
+    #hostname: eureka-microservice-0
+    hostname: localhost
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
-      #defaultZone: http://localhost:8761/eureka
+      #defaultZone: http://eureka-0.eureka.default.svc.cluster.local:8761/eureka
+      defaultZone: http://localhost:8761/eureka

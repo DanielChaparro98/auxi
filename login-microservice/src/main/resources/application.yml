@@ -5,19 +5,19 @@ spring:
   application:
     name: auth-service
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/users
-    username: admin
-    password: 1234
+    #driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/users
+    #username: admin
+    #password: 1234
     #Producción
     #url: jdbc:mysql://viaduct.proxy.rlwy.net:58894/railway
     #username: root
     #password: bF1E3e3fH-2DADF366C626-fFEGbfeGb
     #Producción
-    #driver-class-name: com.mysql.jdbc.Driver
-    #url: jdbc:mysql://srv1455.hstgr.io:3306/u854419727_users
-    #username: u854419727_auxi
-    #password: kNujb*]q7~
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://srv1623.hstgr.io:3306/u638268351_users
+    username: u638268351_auxi_login
+    password: kNujb*]q7~
   cloud:
     discovery:
       enabled: true
